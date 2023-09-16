@@ -1,0 +1,15 @@
+@import "src/settings.scss";
+
+.edit-account {
+  p.success,
+  p.error {
+    background-color: $color-success;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px
+  }
+
+  p.error {
+    background-color: $color-danger;
+  }
+}

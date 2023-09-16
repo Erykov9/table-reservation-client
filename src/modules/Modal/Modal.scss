@@ -1,0 +1,31 @@
+@import "src/settings.scss";
+
+.modal-module {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.704);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+
+
+  .modal-wrapper {
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    padding: 15px;
+    overflow-y: auto;
+
+    span.x-mark {
+      display: block;
+      width: 100%;
+      text-align: right;
+      cursor: pointer;
+    }
+
+  }
+}

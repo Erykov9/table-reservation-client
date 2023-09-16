@@ -1,0 +1,20 @@
+@import "src/settings.scss";
+
+.reservation-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("../../../public//restaurant2.jpg");
+  background-position: bottom;
+  background-size: cover;
+  padding-top: 77px;
+
+  .wrapper {
+    background-color: rgba(255, 255, 255, 0.619);
+    min-height: 550px;
+    width: 90%;
+    border-radius: 10px;
+    padding: 15px;
+  }
+}

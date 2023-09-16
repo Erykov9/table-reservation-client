@@ -1,0 +1,26 @@
+@import "src/settings.scss";
+
+.account-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:90vh;
+  button {
+    margin: 0;
+  }
+  .wrapper {
+    .header {
+      padding-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      h2 {
+        text-align: center;
+      }
+      h1 {
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  }
+}

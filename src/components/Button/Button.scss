@@ -1,0 +1,52 @@
+@import "src/settings.scss";
+
+.button {
+  border: none;
+  padding: 12px 21px;
+  color: white;
+  margin: 0 5px;
+  cursor: pointer;
+  font-family: $font-arsenal;
+  font-size: 1.2rem;
+  transition: all .2s;
+
+  &.default {
+    background-color: $color-primary;
+    &:hover {
+      background-color: lighten($color-primary, 5%);
+      color:white;
+    }
+  }
+  &.success {
+    background-color: $color-success;
+    &:hover {
+      background-color: lighten($color-success, 5%);
+      color:white;
+    }
+  }
+  &.danger {
+    background-color: $color-danger;
+    &:hover {
+      background-color: lighten($color-danger, 5%);
+      color:white;
+    }
+  }
+  &.none {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &.nav-link {
+    box-shadow: none;
+    &:hover {
+      background-color: lighten($color-primary, 10%);
+      color:white;
+    }
+  }
+
+  &.active {
+    background-color: lighten($color-primary, 10%);
+    color: white!important;
+  }
+  
+
+}

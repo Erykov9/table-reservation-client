@@ -1,0 +1,23 @@
+@import "src/settings.scss";
+
+.menu {
+  width: 190px;
+  margin-right: 15px;
+  background-color: $background;
+  height: calc(100vh - 100px);
+
+  .menu-list {
+    ul {
+      display: flex;
+      flex-direction: column;
+      a {
+        text-decoration: none;
+        margin: 0;
+        padding: 25px 15px;
+      }
+      button {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "src/settings.scss";
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: $font-arsenal;
+}

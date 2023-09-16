@@ -1,0 +1,118 @@
+@import "src/settings.scss";
+
+.login-register-page {
+  background-image: url("../../../public/restaurant2.jpg");
+  background-size: cover;
+  background-position: bottom;
+  min-height: 100vh;
+  padding-top: 77px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    width: 80%;
+    min-height: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    @media (max-width: 900px) {
+      width: 100%;
+    }
+
+    .form {
+      width: 50%;
+      @media (max-width: 900px) {
+        width: 100%
+      }
+
+      .header {
+        .success {
+          background-color: $color-success;
+          padding: 10px;
+          text-align: center;
+          border-radius: 10px;
+        }
+
+        .error {
+          background-color: $color-danger;
+          padding: 10px;
+          text-align: center;
+          border-radius: 10px;
+        }
+
+        .error,
+        .success {
+          font-size: 1.2rem;
+        }
+      }
+
+      .register-login {
+        form {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+
+          ::placeholder {
+            color: rgb(124, 124, 124);
+          }
+
+          .form-part {
+            width: 100%;
+
+            &_half {
+              width: 47%;
+            }
+          }
+
+          label {
+            color: black;
+            font-size: 1.3rem;
+          }
+  
+          input {
+            border-color: black;
+          }
+
+          .form-info {
+            width: 100%;
+            padding: 15px 0;
+
+            span {
+              cursor: pointer;
+
+              &:hover {
+                color: $color-white
+              }
+            }
+          }
+
+          .btns {
+            button {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .image {
+      width: 35%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media (max-width: 1200px) {
+        display: none;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
