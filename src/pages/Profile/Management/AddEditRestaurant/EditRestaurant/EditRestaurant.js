@@ -13,7 +13,6 @@ const AddRestaurant = ({ restaurantData }) => {
     message: '',
   });
 
-  console.log(restaurantData)
 
   const initialValues = {
     name: restaurantData.name || "",
