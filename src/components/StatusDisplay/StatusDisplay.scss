@@ -1,0 +1,12 @@
+@import "src/settings.scss";
+
+.status-display.error,
+.status-display.success {
+  background-color: $color-danger;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.status-display.success {
+  background-color: $color-success;
+}

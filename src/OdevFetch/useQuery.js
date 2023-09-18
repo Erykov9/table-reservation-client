@@ -18,10 +18,6 @@ export const useQuery = ({ endpoint, isLazy }) => {
     })
       .then(response => response.json())
       .then(res => {
-        if (res && res.status && res.message) {
-          document.showAlert(res.message, res.status);
-        }
-
         setState({
           ...state,
           payload: res,

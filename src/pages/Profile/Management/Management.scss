@@ -1,0 +1,25 @@
+@import "src/settings.scss";
+
+.management-page {
+  display: flex;
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+
+    .list {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 80%;
+      button {
+        margin: 0;
+      }
+      a {
+        margin: 0;
+        text-decoration: none;
+      }
+    }
+  }
+}

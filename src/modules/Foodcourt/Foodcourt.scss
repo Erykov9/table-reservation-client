@@ -1,0 +1,49 @@
+@import "src/settings.scss";
+
+.foodcourt-module {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-weight: bold;
+  }
+
+  .btn-wrapper {
+    margin-bottom: 25px;
+  }
+  
+  .foodcourt-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 90%;
+    flex-direction: column;
+
+    .foodcourt {
+      background-image: url("../../../public/reservation_background.png");
+      background-position: center;
+      background-size: contain;
+      height: 450px;
+      width: 750px;
+      position: relative;
+
+      .table {
+        position: absolute;
+        background-color: $color-primary;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        height: 20%;
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+}

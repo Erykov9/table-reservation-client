@@ -28,12 +28,17 @@ export const menuValues = [
   {
     id: 2,
     value: "Zarządzaj salą",
-    href: "manage-foodcourt"
+    href: "management"
   },
   {
     id: 3,
     value: "Rezerwacje",
     href: "reservations"
+  },
+  {
+    id: 4,
+    value: "Statystyki",
+    href: "statistics"
   }
 ];
 

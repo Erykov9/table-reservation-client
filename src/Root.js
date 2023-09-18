@@ -47,7 +47,7 @@ const Root = () => {
             </LoginRegister>
           }
         />
-        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/profile/*" element={<Profile />} />
       </Routes>
     </>
   );
