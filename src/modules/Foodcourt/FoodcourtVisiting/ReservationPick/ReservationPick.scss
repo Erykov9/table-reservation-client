@@ -1,0 +1,21 @@
+.reservation-pick {
+  padding: 25px;
+
+  h3, h5 {
+    text-align: center;
+  }
+  
+  button {
+    margin: 10px 0 0 0;
+  }
+
+  .reservation-pick-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-bottom: 25px;
+    }
+  }
+}

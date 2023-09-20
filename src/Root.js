@@ -8,6 +8,7 @@ import Register from "./pages/LoginRegister/Register/Register";
 import Login from "./pages/LoginRegister/Login/Login";
 import { useUserContext } from "./provider/hooks/useUserContext";
 import { useEffect } from "react";
+import ReservationSingle from "./pages/Reservation/ReservationSingle/ReservationSingle";
 
 const Root = () => {
   const { isLogged, userData, isLoggedIn } = useUserContext();
@@ -48,6 +49,7 @@ const Root = () => {
           }
         />
         <Route exact path="/profile/*" element={<Profile />} />
+        <Route exact path="/reservation/:id" element={<ReservationSingle/>}/>
       </Routes>
     </>
   );

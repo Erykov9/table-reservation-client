@@ -63,6 +63,20 @@ export const useUsers = (props) => {
   };
 };
 
+export const useReservations = (props) => {
+  const { loading, payload, refetch } = useQuery({
+    endpoint: endpointGenerator("reservations", props),
+    isLazy: props?.isLazy,
+    query: props?.query
+  });
+
+  return {
+    loading,
+    payload,
+    refetch
+  }
+}
+
 export const useRestaurants = (props) => {
   const { loading, payload, refetch } = useQuery({
     endpoint: endpointGenerator("restaurants", props),

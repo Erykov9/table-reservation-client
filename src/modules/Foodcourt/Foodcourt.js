@@ -9,17 +9,19 @@ import { useTables } from "../../OdevFetch";
 import StatusDisplay from "../../components/StatusDisplay/StatusDisplay";
 import Modal from "../../modules/Modal/Modal";
 import AddTable from "./AddTable/AddTable";
+import FoodcourtVisiting from "./FoodcourtVisiting/FoodcourtVisiting";
 
-const Foodcourt = ({isVisiting = false}) => {
+const Foodcourt = ({ isVisiting = false }) => {
   const { id } = useParams();
-  const { payload, loading } = useRestaurants({ id, isSecure: true });
+  const { payload, loading } = useRestaurants({ query: id });
   const {
     payload: tablePayload,
     loading: tableLoading,
     save,
     refetch,
-    remove
+    remove,
   } = useTables({ id });
+
   const [isEdit, setIsEdit] = useState(false);
   const [status, setStatus] = useState({
     status: undefined,
@@ -29,7 +31,7 @@ const Foodcourt = ({isVisiting = false}) => {
   const [openModal, setOpenModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState({
     isOpen: false,
-    data: {}
+    data: {},
   });
   const [tablePositions, setTablePositions] = useState([]);
 
@@ -58,7 +60,8 @@ const Foodcourt = ({isVisiting = false}) => {
   };
 
   if (loading) return <Spinner></Spinner>;
-  const restaurant = payload?.data;
+  const restaurant = payload?.data?.results;
+  const restaurantName = restaurant?.filter((item) => item.id == id);
 
   const saveHandler = async () => {
     const output = await save({ body: tablePositions });
@@ -79,32 +82,15 @@ const Foodcourt = ({isVisiting = false}) => {
     }, 2500);
   };
 
-  if(isVisiting) {
+  if (isVisiting) {
     return (
-      <div className="foodcourt-module">
-      <h3>
-        Restauracja <span>{restaurant.name}</span>
-      </h3>
-      <div className="foodcourt-wrapper">
-        <div className="foodcourt">
-          {tablePositions?.map((item) => (
-            <Draggable
-              key={`table-${item.id}`}
-              onDrag={(e, dragData) => onDrag(e, item.id, dragData)}
-              disabled={!isEdit}
-              position={{ x: item.x, y: item.y }}
-              bounds="parent"
-            >
-              <div className="table" id={item.id}>
-                <h5>Numer stolika: {item.table_number}</h5>
-                <h5>{item.capacity} osobowy</h5>
-              </div>
-            </Draggable>
-          ))}
-        </div>
-      </div>
-    </div>
-    )
+      <>
+        <FoodcourtVisiting
+          restaurant={restaurantName}
+          tablePositions={tablePositions || []}
+        />
+      </>
+    );
   }
 
   return (
@@ -132,10 +118,18 @@ const Foodcourt = ({isVisiting = false}) => {
               position={{ x: item.x, y: item.y }}
               bounds="parent"
             >
-              <div className="table" id={item.id} onClick={() => setOpenEditModal(!isEdit && {
-                isOpen: true,
-                data: item
-              })}>
+              <div
+                className="table"
+                id={item.id}
+                onClick={() =>
+                  setOpenEditModal(
+                    !isEdit && {
+                      isOpen: true,
+                      data: item,
+                    }
+                  )
+                }
+              >
                 <h5>Numer stolika: {item.table_number}</h5>
                 <h5>{item.capacity} osobowy</h5>
               </div>
@@ -154,17 +148,23 @@ const Foodcourt = ({isVisiting = false}) => {
         </Modal>
       )}
       {openEditModal.isOpen && (
-        <Modal onClose={() => setOpenEditModal({
-          isOpen: false,
-          data: {}
-        })}>
+        <Modal
+          onClose={() =>
+            setOpenEditModal({
+              isOpen: false,
+              data: {},
+            })
+          }
+        >
           <AddTable
             save={save}
             refetch={refetch}
-            onClose={() => setOpenEditModal({
-              isOpen: false,
-              data: {}
-            })}
+            onClose={() =>
+              setOpenEditModal({
+                isOpen: false,
+                data: {},
+              })
+            }
             data={openEditModal.data}
             remove={remove}
           />

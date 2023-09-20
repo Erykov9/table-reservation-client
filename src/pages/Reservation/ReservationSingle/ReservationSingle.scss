@@ -1,0 +1,25 @@
+@import "src/settings.scss";
+
+.reservation-single-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("../../../../public/restaurant2.jpg");
+  background-position: bottom;
+  background-size: cover;
+  padding-top: 77px;
+
+  .reservation-single-wrapper {
+    background-color: white;
+    max-height: 700px;
+    min-width: 80%;
+    overflow-y: auto;
+    padding-bottom: 25px;
+
+    .tabs {
+      height: 100%;
+      flex-direction: column;
+    }
+  }
+}

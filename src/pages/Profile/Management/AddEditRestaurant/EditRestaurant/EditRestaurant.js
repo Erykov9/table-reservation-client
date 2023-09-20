@@ -13,14 +13,16 @@ const AddRestaurant = ({ restaurantData }) => {
     message: '',
   });
 
-
   const initialValues = {
-    name: restaurantData.name || "",
-    city: restaurantData.city || "",
-    street: restaurantData.street || "",
-    street_number: restaurantData.street_number || "",
-    local_number: restaurantData.local_number || null,
-    zipcode: restaurantData.zipcode || null
+    name: restaurantData.name || '',
+    city: restaurantData.city || '',
+    street: restaurantData.street || '',
+    street_number: restaurantData.street_number || '',
+    local_number: restaurantData.local_number || '',
+    zipcode: restaurantData.zipcode || '',
+    open_hour: restaurantData.open_hour || '',
+    close_hour: restaurantData.close_hour || '',
+    description: restaurantData.description || '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -28,16 +30,21 @@ const AddRestaurant = ({ restaurantData }) => {
     city: Yup.string().required('Pole "Miasto" jest wymagane'),
     street: Yup.string().required('Pole "Ulica" jest wymagane'),
     street_number: Yup.string().required('Pole "Numer ulicy" jest wymagane'),
+    local_number: Yup.string(),
+    zipcode: Yup.string(),
+    open_hour: Yup.string().required('Pole "Godziny otwarcia" jest wymagane'),
+    close_hour: Yup.string().required('Pole "Godziny zamknięcia" jest wymagane'),
+    description: Yup.string().max(300, 'Opis nie może zawierać więcej niż 300 znaków'),
   });
 
   const handleSubmit = async (values) => {
     const restaurantBody = {
       ...values,
-      id: restaurantData.id
+      id: restaurantData.id,
     };
 
     const output = await save({ body: restaurantBody });
-    if(output.status === "error") {
+    if (output.status === 'error') {
       setStatus({
         status: output.status,
         message: output.message,
@@ -49,10 +56,9 @@ const AddRestaurant = ({ restaurantData }) => {
       });
 
       setTimeout(() => {
-        document.location.reload()
+        document.location.reload();
       }, 1500);
     }
-
   };
 
   return (
@@ -85,12 +91,27 @@ const AddRestaurant = ({ restaurantData }) => {
           <ErrorMessage name="local_number" component="div" className="error" />
         </div>
         <div>
-          <label htmlFor="zipcode">Kod pocztowy *</label>
+          <label htmlFor="zipcode">Kod pocztowy</label>
           <Field type="text" id="zipcode" name="zipcode" />
           <ErrorMessage name="zipcode" component="div" className="error" />
         </div>
+        <div>
+          <label htmlFor="open_hour">Godziny otwarcia *</label>
+          <Field type="time" id="open_hour" name="open_hour" />
+          <ErrorMessage name="open_hour" component="div" className="error" />
+        </div>
+        <div>
+          <label htmlFor="close_hour">Godziny zamknięcia *</label>
+          <Field type="time" id="close_hour" name="close_hour" />
+          <ErrorMessage name="close_hour" component="div" className="error" />
+        </div>
+        <div>
+          <label htmlFor="description">Opis</label>
+          <Field as="textarea" id="description" name="description" />
+          <ErrorMessage name="description" component="div" className="error" />
+        </div>
         <Button type="submit" variant="success">
-        {status.status === "success" && <Spinner/>} Wyślij
+          {status.status === 'success' && <Spinner />} Wyślij
         </Button>
       </Form>
     </Formik>

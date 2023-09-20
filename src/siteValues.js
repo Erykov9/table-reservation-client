@@ -71,4 +71,7 @@ export const sponsorsValues = [
     value: "sure",
     src: "pewnie.png"
   },
-]
+];
+
+export const DATETIME = "YYYY-MM-DD HH:mm:ss";
+export const DATE = "YYYY-MM-DD";

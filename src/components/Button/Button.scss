@@ -1,6 +1,7 @@
 @import "src/settings.scss";
 
-.button {
+.button,
+a {
   border: none;
   padding: 12px 21px;
   color: white;
@@ -9,6 +10,8 @@
   font-family: $font-arsenal;
   font-size: 1.2rem;
   transition: all .2s;
+  text-decoration: none;
+
 
   &.default {
     background-color: $color-primary;

@@ -1,0 +1,27 @@
+@import "src/settings.scss";
+
+.reservetable-module {
+  padding: 25px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+
+  form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .reserve-form {
+      width:100%;
+    }
+
+    button {
+      width: 100px;
+      margin: 25px;
+    }
+  }
+}
