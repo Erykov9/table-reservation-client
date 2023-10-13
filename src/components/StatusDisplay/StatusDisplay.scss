@@ -5,6 +5,9 @@
   background-color: $color-danger;
   padding: 15px;
   border-radius: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+
 }
 
 .status-display.success {

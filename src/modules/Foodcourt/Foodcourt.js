@@ -96,7 +96,7 @@ const Foodcourt = ({ isVisiting = false }) => {
   return (
     <div className="foodcourt-module">
       <h3>
-        Aktualnie zarządzasz restauracją <span>{restaurant.name}</span>
+        Aktualnie zarządzasz restauracją <span>{restaurantName[0]?.name}</span>
       </h3>
       {<StatusDisplay status={status.status}>{status.message}</StatusDisplay>}
       <div className="btn-wrapper">

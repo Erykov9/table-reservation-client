@@ -7,39 +7,44 @@ import moment from "moment";
 import { DATETIME } from "../../../../siteValues";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import StatusDisplay from "../../../../components/StatusDisplay/StatusDisplay";
+import { useState } from "react";
 
 const ReservationPick = ({ onClick, tableData, date, restaurantData }) => {
   const { id } = useParams();
-  const { payload, loading } = useReservations({
+  const { payload, loading, save, refetch } = useReservations({
     query: { date, restaurantId: id, tableId: tableData.id },
   });
-
+  const [status, setStatus] = useState({
+    status: "",
+    message: "",
+  });
   if (loading) return <Spinner></Spinner>;
 
   const initialValues = {
-    start_date: "",
-    end_date: "",
+    reservation_start: "",
+    reservation_end: "",
     name: "",
     last_name: "",
     notes: "",
   };
 
   const validationSchema = Yup.object().shape({
-    start_date: Yup.string()
+    reservation_start: Yup.string()
       .required("Godzina rozpoczęcia rezerwacji jest wymagana")
       .test(
         "is-earlier",
         "Godzina rozpoczęcia musi być wcześniejsza niż godzina zakończenia",
         function (value, { parent }) {
-          const { end_date } = parent;
-
-          if (!value || !end_date) {
+          const { reservation_end } = parent;
+  
+          if (!value || !reservation_end) {
             return true;
           }
-
+  
           const startTime = moment(value, "HH:mm");
-          const endTime = moment(end_date, "HH:mm");
-
+          const endTime = moment(reservation_end, "HH:mm");
+  
           return startTime.isBefore(endTime);
         }
       )
@@ -58,35 +63,77 @@ const ReservationPick = ({ onClick, tableData, date, restaurantData }) => {
           return true;
         }
       ),
-    end_date: Yup.string().required(
-      "Godzina zakończenia rezerwacji jest wymagana"
-    )
-    .test(
-      "is-before-close",
-      "Rezerwacja musi być podczas godzin otwarcia restauracji",
-      (value) => {
-        if (
-          moment(restaurantData[0].open_hour, "HH:mm") >
-            moment(value, "HH:mm") ||
-          moment(restaurantData[0].close_hour, "HH:mm") <
-            moment(value, "HH:mm")
-        ) {
-          return false;
+    reservation_end: Yup.string()
+      .required("Godzina zakończenia rezerwacji jest wymagana")
+      .test(
+        "is-before-close",
+        "Rezerwacja musi być podczas godzin otwarcia restauracji",
+        (value) => {
+          if (
+            moment(restaurantData[0].open_hour, "HH:mm") >
+              moment(value, "HH:mm") ||
+            moment(restaurantData[0].close_hour, "HH:mm") <
+              moment(value, "HH:mm")
+          ) {
+            return false;
+          }
+          return true;
         }
-        return true;
-      }
-    ),
+      )
+      .test(
+        "is-max-3-hours",
+        "Rezerwacja nie może trwać dłużej niż 3 godziny",
+        function (value, { parent }) {
+          const { reservation_start, reservation_end } = parent;
+  
+          if (!reservation_start || !reservation_end) {
+            return true;
+          }
+  
+          const startTime = moment(reservation_start, "HH:mm");
+          const endTime = moment(reservation_end, "HH:mm");
+  
+          const duration = moment.duration(endTime.diff(startTime));
+  
+          return duration.asHours() <= 3;
+        }
+      ),
     name: Yup.string().required("Imię jest wymagane"),
     notes: Yup.string(),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log({
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const start = `${date} ${values.reservation_start}`;
+    const end = `${date} ${values.reservation_end}`
+    const formData = {
       ...values,
+      reservation_start: start,
+      reservation_end: end,
       table_id: tableData.id,
       restaurant_id: Number(id),
-    });
+    };
+
     setSubmitting(false);
+
+    const output = await save({
+      body: formData,
+    });
+
+    setStatus({
+      status: output.status,
+      message: output.message,
+    });
+
+    if(output.status === "success") {
+      setTimeout(() => {
+        setStatus({
+          status: "",
+          message: "",
+        });
+  
+        refetch();
+      }, 2500);
+    }
   };
 
   const results = payload?.data;
@@ -96,6 +143,8 @@ const ReservationPick = ({ onClick, tableData, date, restaurantData }) => {
       <div className="reservation-pick-btn">
         <Button onClick={() => onClick(2)}>Wróć</Button>
       </div>
+      <StatusDisplay status={status.status}>{status.message}</StatusDisplay>
+
       <h3>Godziny otwarcia</h3>
       <h5>
         {`${restaurantData[0].open_hour.split(":")[0]}:${
@@ -139,21 +188,21 @@ const ReservationPick = ({ onClick, tableData, date, restaurantData }) => {
         {({ isSubmitting }) => (
           <Form>
             <div className="form-group">
-              <label htmlFor="start_date">
+              <label htmlFor="reservation_start">
                 Godzina rozpoczęcia rezerwacji *
               </label>
-              <Field type="time" name="start_date" className="form-control" />
+              <Field type="time" name="reservation_start" className="form-control" />
               <ErrorMessage
-                name="start_date"
+                name="reservation_start"
                 component="div"
                 className="error"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="end_date">Godzina zakończenia rezerwacji *</label>
-              <Field type="time" name="end_date" className="form-control" />
-              <ErrorMessage name="end_date" component="div" className="error" />
+              <label htmlFor="reservation_end">Godzina zakończenia rezerwacji *</label>
+              <Field type="time" name="reservation_end" className="form-control" />
+              <ErrorMessage name="reservation_end" component="div" className="error" />
             </div>
 
             <div className="form-group">

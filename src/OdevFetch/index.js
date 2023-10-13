@@ -70,10 +70,16 @@ export const useReservations = (props) => {
     query: props?.query
   });
 
+  const save = async ({body}) => {
+    const data = await returnFetch({endpoint: "reservations", body});
+    return data;
+  };
+
   return {
     loading,
     payload,
-    refetch
+    refetch,
+    save
   }
 }
 
