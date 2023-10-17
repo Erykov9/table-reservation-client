@@ -1,0 +1,16 @@
+.reservation-profile-page {
+  button {
+    margin: 0 0 15px 0;
+  }
+
+  .arrows {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 45px;
+
+    .forward,
+    .back {
+      cursor: pointer;
+    }
+  }
+}
