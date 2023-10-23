@@ -85,6 +85,7 @@ const Reservation = () => {
                 <tr>
                   <th>Początek rezerwacji</th>
                   <th>Koniec rezerwacji</th>
+                  <th>Numer stolika</th>
                   <th></th>
                 </tr>
               </thead>

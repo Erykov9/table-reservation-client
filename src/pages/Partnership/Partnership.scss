@@ -1,0 +1,13 @@
+.contact-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../../public/restaurant2.jpg");
+  background-size: cover;
+  background-position: bottom;
+
+  h1 {
+    color: white;
+  }
+}

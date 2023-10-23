@@ -9,6 +9,8 @@ import Login from "./pages/LoginRegister/Login/Login";
 import { useUserContext } from "./provider/hooks/useUserContext";
 import { useEffect } from "react";
 import ReservationSingle from "./pages/Reservation/ReservationSingle/ReservationSingle";
+import Contact from "./pages/Contact/Contact";
+import Partnership from "./pages/Partnership/Partnership";
 
 const Root = () => {
   const { isLogged, userData, isLoggedIn } = useUserContext();
@@ -50,6 +52,8 @@ const Root = () => {
         />
         <Route exact path="/profile/*" element={<Profile />} />
         <Route exact path="/reservation/:id" element={<ReservationSingle/>}/>
+        <Route exact path="/contact" element={<Contact/>} />
+        <Route exact path="/partnership" element={<Partnership/>} />
       </Routes>
     </>
   );

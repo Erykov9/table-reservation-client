@@ -13,7 +13,6 @@ import { useEffect } from "react";
 const Profile = () => {
   const navigate = useNavigate();
   const { userData, isLogged } = useUserContext();
-  console.log(userData.length)
 
   useEffect(() => {
     if (!isLogged || !userData) navigate("/");

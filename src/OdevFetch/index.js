@@ -125,7 +125,7 @@ export const useTables = (props) => {
   const remove = async ({id}) => {
     const data = await returnFetch({endpoint: `auth/tables/${id}/remove`});
     return data;
-  }
+  };
 
   return {
     loading,

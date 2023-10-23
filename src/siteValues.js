@@ -75,3 +75,4 @@ export const sponsorsValues = [
 
 export const DATETIME = "YYYY-MM-DD HH:mm:ss";
 export const DATE = "yyyy-MM-DD";
+export const TIME = "HH:mm:ss";
